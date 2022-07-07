@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils.js';
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth
+} from '../../utils/firebase/firebase.utils.js';
+import FormInput from '../form-input/form-input.component.jsx';
+import Button from '../button/button.component.jsx';
+import './sign-up-form.styles.scss';
 
 const defaultFormFields = {
   displayName: '',
@@ -48,47 +54,43 @@ const SignUpForm = () => {
   }
 
   return (
-    <div>
-      <h1>Sign up with your email and password</h1>
+    <div className='sign-up-container'>
+      <h2>Don't have an account?</h2>
+      <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <label>Display name</label>
-        <input
+        <FormInput
+          label='Display name'
           type='text'
           required
           onChange={handleChange}
           name='displayName'
           value={displayName}
         />
-
-        <label>Email</label>
-        <input
+        <FormInput
+          label='Email'
           type='email'
           required
           onChange={handleChange}
           name='email'
           value={email}
         />
-
-        <label>Password</label>
-        <input
+        <FormInput
+          label='Password'
           type='password'
           required
           onChange={handleChange}
           name='password'
           value={password}
         />
-
-        <label>Confirm password</label>
-        <input
+        <FormInput
+          label='Confirm password'
           type='password'
           required
           onChange={handleChange}
           name='confirmPassword'
           value={confirmPassword}
         />
-
-        <button type='submit'>Sign up</button>
-
+        <Button children='Sign up' type='submit'/>
       </form>
     </div>
   )
