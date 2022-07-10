@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import {
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup,
-  createUserDocumentFromAuth
-} from '../../utils/firebase/firebase.utils.js';
+
 import FormInput from '../form-input/form-input.component.jsx';
 import Button from '../button/button.component.jsx';
+
+import {
+  signInAuthUserWithEmailAndPassword,
+  signInWithGooglePopup
+} from '../../utils/firebase/firebase.utils.js';
+
 import './sign-in-form.styles.scss';
 
 const defaultFormFields = {
@@ -22,14 +24,22 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   }
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields({ ...formFields, [name]: value })
+  }
+
+  const signInWithGoogle = async () => {
+    await signInWithGooglePopup();
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
+      await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(user)
       clearFormFields();
     } catch (error) {
       switch (error.code) {
@@ -43,16 +53,6 @@ const SignInForm = () => {
           console.log(error);
       }
     }
-  }
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value })
-  }
-
-  const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
   }
 
   return (
