@@ -1,7 +1,6 @@
 import Directory from '../../components/directory/directory.component.jsx';
 
 const Home = () => {
-
   const categoriesArray = [
     {
       "id": 1,
@@ -29,9 +28,7 @@ const Home = () => {
       "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
     }
   ]
-
   return <Directory categories={categoriesArray} />;
-
 }
 
 export default Home;
