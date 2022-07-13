@@ -1,18 +1,8 @@
 import { useState } from 'react';
-
-import FormInput from '../form-input/form-input.component.jsx';
-import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component.jsx';
-
-import {
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup
-} from '../../utils/firebase/firebase.utils.js';
-
-import {
-  SignInContainer,
-  ButtonsContainer,
-  H2
-} from './sign-in-form.styles.jsx';
+import FormInput from '../form-input/form-input.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from '../../utils/firebase/firebase.utils';
+import { SignInContainer, ButtonsContainer, H2 } from './sign-in-form.styles';
 
 const defaultFormFields = {
   email: '',
@@ -34,12 +24,14 @@ const SignInForm = () => {
   }
 
   const signInWithGoogle = async () => {
+    // tutaj
     await signInWithGooglePopup();
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // tutaj
       await signInAuthUserWithEmailAndPassword(
         email,
         password
