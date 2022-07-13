@@ -6,7 +6,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card/product-card.component.jsx';
-import { selectCategoriesMap } from '../../store/categories/categories.selector'
+import { selectCategories } from '../../store/categories/categories.selector'
 import {
   CategoryContainer,
   CategoryTitle
@@ -14,11 +14,11 @@ import {
 
 const Category = () => {
   const { category } = useParams();
-  const categoriesMap = useSelector(selectCategoriesMap);
-  const [products, setProducts] = useState(categoriesMap[category]);
+  const categories = useSelector(selectCategories);
+  const [products, setProducts] = useState(categories[category]);
   useEffect(() => {
-    setProducts(categoriesMap[category]);
-  }, [category, categoriesMap])
+    setProducts(categories[category]);
+  }, [category, categories])
   return (
     <Fragment>
       <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
