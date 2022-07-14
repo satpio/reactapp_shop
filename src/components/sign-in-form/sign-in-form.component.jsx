@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
-import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from '../../utils/firebase/firebase.utils';
+import { googleSignInStart, emailSignInStart } from '../../store/user/user.action';
 import { SignInContainer, ButtonsContainer, H2 } from './sign-in-form.styles';
 
 const defaultFormFields = {
@@ -10,33 +11,21 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
-
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
-  const clearFormFields = () => {
-    setFormFields(defaultFormFields);
-  }
-
-  const handleChange = (event) => {
+  const inputChangeHandler = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value })
   }
-
-  const signInWithGoogle = async () => {
-    // tutaj
-    await signInWithGooglePopup();
+  const onGoogleSignInStartHandler = async () => {
+    dispatch(googleSignInStart());
   }
-
-  const handleSubmit = async (event) => {
+  const emailSignInStartHandler = async (event) => {
     event.preventDefault();
     try {
-      // tutaj
-      await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      clearFormFields();
+      dispatch(emailSignInStart(email, password));
+      setFormFields(defaultFormFields);
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
@@ -50,17 +39,16 @@ const SignInForm = () => {
       }
     }
   }
-
   return (
     <SignInContainer>
       <H2>Already have an account?</H2>
       <span>Sign in with your email and password</span>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={emailSignInStartHandler}>
         <FormInput
           label='Email'
           type='email'
           required
-          onChange={handleChange}
+          onChange={inputChangeHandler}
           name='email'
           value={email}
         />
@@ -68,7 +56,7 @@ const SignInForm = () => {
           label='Password'
           type='password'
           required
-          onChange={handleChange}
+          onChange={inputChangeHandler}
           name='password'
           value={password}
         />
@@ -81,13 +69,12 @@ const SignInForm = () => {
             children='Sign in with Google'
             type='button'
             buttonType={BUTTON_TYPE_CLASSES.google}
-            onClick={signInWithGoogle}
+            onClick={onGoogleSignInStartHandler}
           />
         </ButtonsContainer>
       </form>
     </SignInContainer>
   )
-
 }
 
 export default SignInForm;
