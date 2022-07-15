@@ -25,7 +25,10 @@ const Navigation = () => {
         <NavLinksContainer>
           <NavLink to='/shop'>Shop</NavLink>
           {currentUser ? (
-            <NavLink as='span' onClick={signOutStartHandler}>Sign out</NavLink>
+            <Fragment>
+              <NavLink as='span' onClick={signOutStartHandler}>Sign out</NavLink>
+              <NavLink to='/panel'>Panel</NavLink>
+            </Fragment>
           ) : (
             <NavLink to='/auth'>Sign In</NavLink>
           )}

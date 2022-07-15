@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { SpinnerContainer } from '../spinner/spinner.styles';
 
 export const DefaultButton = styled.button`
-  min-width: 165px;
   width: auto;
   height: 50px;
   letter-spacing: 0.5px;

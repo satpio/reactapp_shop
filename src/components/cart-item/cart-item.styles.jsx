@@ -16,7 +16,12 @@ export const ItemDetails = styled.div`
   padding: 10px 20px;
 `;
 
-export const SpanPrice = styled.span`
+export const SpanPrice = styled.span``;
+
+export const SpanRemove = styled.span`
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 export const SpanName = styled.span`

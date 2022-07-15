@@ -4,22 +4,23 @@ export const ProductCartContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 450px;
   align-items: center;
   position: relative;
 
   img {
     width: 100%;
-    height: 95%;
+    height: 300px;
+    min-height: 300px;
     object-fit: cover;
     margin-bottom: 5px;
   }
 
-  button {
+  &>button {
     width: 80%;
     opacity: 0.7;
     position: absolute;
-    top: 255px;
+    top: 25px;
     display: none;
   }
 
@@ -37,17 +38,15 @@ export const ProductCartContainer = styled.div`
 
 export const Footer = styled.div`
   width: 100%;
-  height: 5%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   font-size: 18px;
 `;
 
 export const Name = styled.span`
-  width: 90%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `;
 
 export const Price = styled.span`
-  width: 10%;
+  margin-bottom: 10px;
 `;
