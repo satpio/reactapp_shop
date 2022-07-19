@@ -1,3 +1,4 @@
+import { FC, memo } from 'react';
 import { useDispatch } from 'react-redux/es/exports';
 import { useSelector } from 'react-redux/es/exports';
 import { selectCartItems } from '../../store/cart/cart.selector';
@@ -5,13 +6,11 @@ import { clearItemFromCart } from '../../store/cart/cart.action';
 import { CartItemContainer, ItemDetails, SpanPrice, SpanName, SpanRemove, Image } from './cart-item.styles';
 import { CartItem as CartItemType } from '../../store/cart/cart.types';
 
-type PropsType = {
-  key: number;
+type CartItemProps = {
   cartItem: CartItemType;
 }
 
-const CartItem = (props: PropsType) => {
-  const { cartItem } = props;
+const CartItem: FC<CartItemProps> = memo(({ cartItem }) => {
   const dispatch = useDispatch();
   const { name, imageUrl, price, quantity } = cartItem;
   const cartItems = useSelector(selectCartItems);
@@ -26,6 +25,6 @@ const CartItem = (props: PropsType) => {
       </ItemDetails>
     </CartItemContainer>
   );
-}
+})
 
 export default CartItem;
